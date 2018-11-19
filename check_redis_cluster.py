@@ -7,7 +7,9 @@ import sys
 import os
 
 def check(option):
-    command = "redis-cli info | grep %s" % option
+    host = sys.argv[1]
+    port = sys.argv[2]
+    command = "redis-cli -h " + host + " -p " + port + " info | grep %s" % option
     p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
     output, err = p.communicate()
     return output.split(':')[1].rstrip()
